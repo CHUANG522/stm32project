@@ -72,3 +72,4 @@ Thumbs.db    # Windows 缩略图文件
 *~           # 临时备份文件（Linux/Mac）
 *.swp        # Vim 临时文件
 *.swo        # GDB 日志文件
+* text=auto eol=lf
