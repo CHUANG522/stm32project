@@ -1,75 +1,114 @@
-# --------------------------
-# 编译输出文件
-# --------------------------
-*.o          # 目标文件
-*.obj        # 目标文件（Windows 平台）
-*.axf        # 可执行文件（Keil）
-*.elf        # 可执行文件（GCC）
-*.hex        # 十六进制文件
-*.bin        # 二进制文件
-*.map        # 链接映射文件
-*.lst        # 列表文件
-*.sym        # 符号文件
-*.d          # 依赖文件
-*.crf        # 编译记录文件
-*.lnp        # 链接参数文件
-*.sct        # 分散加载文件（自动生成的可忽略）
-*.bak        # 备份文件
+# ========================= 通用编译产物 (三大环境均适用) =========================
+# 目标文件/链接文件
+*.o
+*.obj
+*.elf
+*.axf
+*.map
+*.lst
+*.sym
+# 烧录文件
+*.hex
+*.bin
+*.srec
+*.mot
+# 依赖文件/临时文件
+*.d
+*.dep
+*.tmp
+*.temp
+*.i
+*.ii
+*.s
+*.ii
+# 日志/报告文件
+*.log
+*.plg
+*.crf
+*.htm
+*.html
+*.err
 
-# --------------------------
-# 编译目录
-# --------------------------
-build/       # 编译输出目录（GCC/CMake）
-Debug/       # 调试目录（Keil/IDE）
-Release/     # 发布目录（Keil/IDE）
-Objects/     # Keil 目标文件目录
-Listings/    # Keil 列表文件目录
-EWARM/       # IAR 项目目录
-__vm/        # 虚拟目录（部分 IDE）
-out/         # 通用输出目录
+# ========================= Keil5 MDK-ARM 专属忽略 =========================
+# Keil工程临时/编译文件
+*.lnp
+*.bak
+*.bak0
+*.uvopt.bak
+*.uvprojx.bak
+*.uvoptx.bak
+*.uvproj.bak
+__vm/
+UV4/
+Objects/
+Listings/
+# Keil配置缓存
+*.opt
+*.jom
 
-# --------------------------
-# IDE/工具配置文件
-# --------------------------
-# Keil
-*.uvopt      # 项目配置文件（用户相关）
-*.uvoptx     # 项目配置文件（Keil 5+）
-*.uvgui*     # 界面配置文件（用户相关）
-*.htm        # Keil 生成的报告文件
-*.plg        # Keil 日志文件
-
-# CubeMX
-*.ioc.bak    # CubeMX 备份文件
-*.mxproject.bak
-STM32CubeIDE/  # STM32CubeIDE 配置目录
-.cproject    # STM32CubeIDE 项目文件
-.project     # STM32CubeIDE 项目文件
-.settings/   # STM32CubeIDE 配置目录
-
-# IAR
-*.ewp        # IAR 项目文件（可忽略，建议手动管理）
-*.eww        # IAR 工作区文件（用户相关）
-*.ewd        # IAR 调试配置文件
-*.dep        # IAR 依赖文件
-
-# VS Code
-.vscode/     # VS Code 配置目录
-*.code-workspace
-
-# CLion/CMake
-.idea/       # CLion 配置目录
-CMakeCache.txt
-CMakeFiles/
-Makefile
+# ========================= STM32CubeMX (Makefile/CMake) 专属忽略 =========================
+# CubeMX默认编译目录
+build/
+cmake-build-*/
+out/
+bin/
+dist/
+obj/
+# CubeMX临时配置/缓存
+.mxproject/
 cmake_install.cmake
-*.cmake
+CMakeCache.txt
+Makefile
+CMakeFiles/
+# CubeMX生成的临时脚本(非核心)
+*.bat
+*.sh
 
-# --------------------------
-# 临时/系统文件
-# --------------------------
-.DS_Store    # Mac 系统文件
-Thumbs.db    # Windows 缩略图文件
-*~           # 临时备份文件（Linux/Mac）
-*.swp        # Vim 临时文件
-*.swo        # GDB 日志文件
-* text=auto eol=lf
+# ========================= VSCode-STM32插件 专属忽略 =========================
+# VSCode编辑器缓存/插件缓存
+.vscode/ipch/
+.vscode/cmake/
+.vscode/settings.json.bak
+.vscode/*.log
+# VSCode STM32插件临时文件
+*.code-workspace
+# CMake Tools插件缓存
+cmake-build-*/
+.ctags.d/
+
+# ========================= 系统/编辑器通用忽略 (跨平台) =========================
+# Windows系统
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+# macOS系统
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+# Linux系统
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+# 通用编辑器缓存
+*.swp
+*.swo
+*.bak
+*~
+
+# ========================= 其他冗余目录 (可选，根据项目调整) =========================
+# 自定义编译目录
+compile/
+build-*/
+release/
+debug/
+# 测试/烧录日志
+log/
+logs/
+# 固件备份
+firmware/
+backup/
