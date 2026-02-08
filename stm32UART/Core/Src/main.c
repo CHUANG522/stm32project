@@ -90,14 +90,7 @@ int main(void)
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
 
-    uint8_t byteNumber =0x5a;
-    uint8_t  byteArray[] = {11,2,3,4,5};
-    char ch ='a' ;
-    char *str ="Hello world";
-    HAL_UART_Transmit(&huart1,&byteNumber,1,HAL_MAX_DELAY);
-    HAL_UART_Transmit(&huart1, byteArray, sizeof(byteArray)/sizeof(byteArray[0]),HAL_MAX_DELAY);
-    HAL_UART_Transmit(&huart1,&ch,1,HAL_MAX_DELAY);
-    HAL_UART_Transmit(&huart1,(uint8_t *)str,strlen(str),HAL_MAX_DELAY);
+    
   /* USER CODE END 2 */
 
   /* Infinite loop */
