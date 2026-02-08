@@ -112,3 +112,10 @@ logs/
 # 固件备份
 firmware/
 backup/
+*.h
+/test1/Drivers
+/test1/MDK-ARM
+/test0/test0/Drivers/STM32G4xx_HAL_Driver/Src
+/test1/Core/Src
+/test0/test0/Drivers/CMSIS/NN/Source/FullyConnectedFunctions
+/test0/test0/Drivers/CMSIS/NN
