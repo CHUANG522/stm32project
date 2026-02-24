@@ -15,3 +15,11 @@ void led_show(uint8_t led,uint8_t mode )
 	HAL_GPIO_WritePin(GPIOD,GPIO_PIN_2,GPIO_PIN_RESET);
 	
 }
+
+char text[20];
+void lcd_show(void)
+{
+   sprintf(text,  " text ");
+	LCD_DisplayStringLine(Line0,(uint8_t *)text);
+
+}

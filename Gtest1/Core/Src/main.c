@@ -19,10 +19,10 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "gpio.h"
-#include <HeadFile.h>
+
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "HeadFile.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -87,9 +87,12 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   /* USER CODE BEGIN 2 */
-  led_show(8,0);
-    led_show(9,0);
-//	led_show(9,1);
+  LCD_Init ();
+ LCD_Clear(Black);
+ LCD_SetBackColor(Black);
+ LCD_SetTextColor(Black);
+ lcd_show();
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
