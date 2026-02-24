@@ -15,15 +15,16 @@
   *
   ******************************************************************************
   */
- #include "Head.h"
+
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "tim.h"
 #include "gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+ #include "Head.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -44,6 +45,13 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
+extern uint8_t Key_B1;
+extern uint8_t Key_B1_Last ;
+extern uint8_t Key_B2;
+extern uint8_t Key_B2_Last ;
+extern char string[20];
+extern int counter;
+extern uint8_t  LED_Mode;
 
 /* USER CODE END PV */
 
@@ -87,34 +95,36 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+  MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
+ LCD_Init();
+ LCD_Clear(Black);
+ LCD_SetBackColor(Black);
+ LCD_SetTextColor(White);
+// HAL_TIM_Base_Start (&htim2);
+ HAL_TIM_Base_Start_IT (&htim2);//使用时钟前一定先使能时钟
  
-
+ 
+ 
+ LED_Show(7,1);
+    LED_Show(3,1);
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  uint8_t LED_Num =2;
-  double counter =0;
-  LED_Show(1,1);
+  
   while (1)
   {  
-	  counter +=0.2;
-	   LED_Show(LED_Num,1);
-	   HAL_Delay(100);
-	  LED_Show(LED_Num,0);
-	  HAL_Delay(100);
+	Key_Scan();
+      LCD_Show();	
+	 LED_Show(2,LED_Mode);
+	 
 	
-	  
-	   if(counter >=5)   break;
-		 
-		  
-			
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
   }
-    LED_Show(LED_Num,0);
+   
   /* USER CODE END 3 */
 }
 
