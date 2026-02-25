@@ -45,13 +45,6 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-extern uint8_t Key_B1;
-extern uint8_t Key_B1_Last ;
-extern uint8_t Key_B2;
-extern uint8_t Key_B2_Last ;
-extern char string[20];
-extern int counter;
-extern uint8_t  LED_Mode;
 
 /* USER CODE END PV */
 
@@ -96,6 +89,7 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_TIM2_Init();
+  MX_TIM3_Init();
   /* USER CODE BEGIN 2 */
  LCD_Init();
  LCD_Clear(Black);
@@ -103,11 +97,11 @@ int main(void)
  LCD_SetTextColor(White);
 // HAL_TIM_Base_Start (&htim2);
  HAL_TIM_Base_Start_IT (&htim2);//使用时钟前一定先使能时钟
+ HAL_TIM_Base_Start (&htim3);
  
  
- 
- LED_Show(7,1);
-    LED_Show(3,1);
+ LED_Show(8,1);
+   
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -116,9 +110,8 @@ int main(void)
   while (1)
   {  
 	Key_Scan();
-      LCD_Show();	
-	 LED_Show(2,LED_Mode);
-	 
+    LCD_Show();	
+	
 	
     /* USER CODE END WHILE */
 
