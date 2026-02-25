@@ -87,14 +87,17 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
-  MX_TIM4_Init();
   MX_TIM16_Init();
   MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
-  HAL_StatusTypeDef HAL_TIM_IC_Start_IT (&htim2, TIM_CHANNEL_1 );
-   HAL_StatusTypeDef HAL_TIM_IC_Start_IT (&htim16, TIM_CHANNEL_1 );
-
- LED_Show(8,1);
+   HAL_TIM_IC_Start_IT (&htim2, TIM_CHANNEL_1 );
+   HAL_TIM_IC_Start_IT (&htim16, TIM_CHANNEL_1 );
+   
+   LCD_Init();
+   LCD_Clear(Black);
+   LCD_SetBackColor(Black);
+   LCD_SetTextColor(White);
+   LED_Show(8,1);
 
   /* USER CODE END 2 */
 
@@ -102,6 +105,8 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+	  LCD_Show();
+	 // Key_Scan();
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

@@ -5,8 +5,8 @@
 int counter=0;
 uint8_t  LED_Mode=0;//LED的亮灭，%2 可控制在0，1之间
 uint8_t  High_Line =0;//LCD某行的高亮显示，除于24等于行数
-uint32_t  fre,capture_value ; //输入捕获的频率
-
+uint32_t  capture_value1 ,capture_value2; //输入捕获的频率
+uint32_t  fre1,fre2;
 //宏定义	
 #define Sys_fre (80000000) //系统时钟
 #define Psc     (80-1)     //预分频
@@ -121,8 +121,11 @@ void LCD_Show(void)
 	
 	if(High_Line ==4) LCD_SetTextColor(Green);
 	else                  LCD_SetTextColor(White);
-	sprintf(string ,"     fre:%d   ",fre);
+	sprintf(string ,"     fre1:%d   ",fre1);
 	LCD_DisplayStringLine ( Line4 , (uint8_t *)string);
+	
+	sprintf(string ,"     fre2:%d   ",fre2);
+	LCD_DisplayStringLine ( Line5 , (uint8_t *)string);
 }
 
 //时钟控制LED亮灭
@@ -136,16 +139,21 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
   }
 }
 //输入捕获，PWM频率
-void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
+void HAL_TIM_IC_CaptureCallback (TIM_HandleTypeDef *htim)
 {
-    if(htim -> Instance == TIM17)
+    if(htim -> Instance == TIM2)
 	{
-		//capture_value = HAL_TIM_ReadCapturedValue (&htim17,TIM_CHANNEL_1);//此函数在捕获到上升沿时，会将CNT赋值给CCR
-	capture_value = TIM17 ->CCR1 ; //也可以这样写
-	TIM17 ->CNT =0;
-	fre = Sys_fre/((Psc +1) * capture_value) ;
+	capture_value1 = TIM2 ->CCR1 ; //也可以这样写
+	TIM2 ->CNT =0;
+	fre1 = Sys_fre/((Psc +1) * capture_value1) ;
 	}
 
+	if(htim -> Instance == TIM16)
+	{
+	capture_value2 = TIM16 ->CCR1 ; //也可以这样写
+	TIM16 ->CNT =0;
+	fre2 = Sys_fre/((Psc +1) * capture_value2) ;
+	}
 }
 
 
