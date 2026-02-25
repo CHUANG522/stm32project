@@ -90,14 +90,16 @@ int main(void)
   MX_GPIO_Init();
   MX_TIM2_Init();
   MX_TIM3_Init();
+  MX_TIM17_Init();
   /* USER CODE BEGIN 2 */
  LCD_Init();
  LCD_Clear(Black);
  LCD_SetBackColor(Black);
  LCD_SetTextColor(White);
-// HAL_TIM_Base_Start (&htim2);
- HAL_TIM_Base_Start_IT (&htim2);//使用时钟前一定先使能时钟
- HAL_TIM_Base_Start (&htim3);
+ HAL_TIM_Base_Start (&htim3);//时钟已在MX_TIM_Init()已经使能，此步是打开定时器开关
+ HAL_TIM_PWM_Start (&htim2 ,TIM_CHANNEL_2 );//这一个函数包含打开定时器2开关的函数了
+ TIM2 ->CCR2 =50; //占空比（高电平在周期的占比）为50%，
+ HAL_TIM_IC_Start_IT (&htim17 ,TIM_CHANNEL_1);
  
  
  LED_Show(8,1);
