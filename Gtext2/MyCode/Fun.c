@@ -150,4 +150,21 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
 
 
 }
-
+/*测量ADC的电压值
+double ADC_Vol (uint8_t ADC)
+{
+	if(ADC!=37 &&ADC!=38) return -1;
+	double result;
+	
+    HAL_ADC_Start(&hadc1);
+	ADC_Value1 =HAL_ADC_GetValue(&hadc1);
+	Vol_Value1 =ADC_Value1*3.3/4096;
+		
+	HAL_ADC_Start(&hadc2);
+	ADC_Value2 =HAL_ADC_GetValue(&hadc2);
+	Vol_Value2 =ADC_Value2*3.3/4096;
+	if(ADC==37)  result =Vol_Value2;
+	else 		 result =Vol_Value1;
+	return       result;
+}
+*/
