@@ -32,7 +32,7 @@ double ADC_Vol (uint8_t ADC)
 	else 		 result =Vol_Value1;
 	return       result;
 }
-
+//接受字符函数
 uint8_t Rec_temp ;
 uint8_t Rec_arr[20];
 uint8_t Send_arr[20];//可以不用这个
@@ -49,12 +49,27 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
   
   }
 }
-
+//处理接受字符函数
 void Uart_Date_Rec(void)
 {
+	if(Rec_Flag)//标志位为1表示有数据传来
+ {
   if(TIM2 ->CNT >15)//发送完成
    {
-	   
+	   if(Rec_arr[0]=='l'&&Rec_arr[1]=='a'&&Rec_arr[2]=='n') 
+       {
+	  HAL_UART_Transmit(&huart1,(uint8_t *)Rec_arr,strlen((char *)Rec_arr),50); 
+		      
+	   }
+	   else 
+        {
+		sprintf((char *)Send_arr,"error！");
+		HAL_UART_Transmit(&huart1,(uint8_t *)Send_arr,strlen((char *)Send_arr),50); 
+		}
+		 Rec_Flag=0;
+		memset(Rec_arr,0,counter);
+		counter=0;
    }
-
+ 
+ }
 }

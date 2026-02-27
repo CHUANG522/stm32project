@@ -110,7 +110,8 @@ int main(void)
   while (1)
   {
 	  // HAL_UART_Transmit (&huart1,(uint8_t *)Ustring ,sizeof(Ustring),50);
-	  HAL_Delay(1000);
+	  Uart_Date_Rec();
+	
 	  LCD_Show();
     /* USER CODE END WHILE */
 
